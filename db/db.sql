@@ -11,6 +11,8 @@ create table stock (
     website text
 );
 
+alter table stock add constraint unique_symbol unique (symbol);
+
 create table stock_price (
     id_stock serial primary key,
     price numeric(12,4),
@@ -40,7 +42,8 @@ alter table stock_price owner to contapessoal ;
 alter table orders owner to contapessoal ;
 
 with stock as(
-    select * from stock s join stock_price sp on (s.id = sp.id_stock) where s.id = 20
+    select * from stock s join stock_price sp on (s.id = sp.id_stock) 
+    --where s.id = 20
 ), q as (
 select 
     s.id as id, 
