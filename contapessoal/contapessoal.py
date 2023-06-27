@@ -3,12 +3,12 @@ from datetime import datetime
 from db.conn import *
 
 #stock = yf.Ticker("WEGE3.SA")
-
+#import pdb; pdb.set_trace()
 #print(stock.info)
 dt = datetime.now()
 hour = int(dt.strftime("%H"))
 open_market = 0
-if hour >= 9 and hour <= 17:
+if hour >= 9 and hour <= 16:
     print("\n[Open Market]: Get data yahoo finance\n-------------------------------------")
     open_market = 1
 else:
@@ -55,7 +55,7 @@ for r in stocks:
     pm = r[5]
     price = r[6]
     result = r[7]
-    data_output = "\nId: {} Ticker: {} Qtd: {} Total: {} Total Market: {} PM: {} Price: {} Result: {}".format(id, ticker, qtd, total, total_market, pm, price, result)
+    data_output = "\nId: {} Ticker: {} \n---------------------------------\n   Qtd: {} \n   Total: {} \n   Total Market: {} \n   PM: {} \n   Price: {} \n   Result: {}".format(id, ticker, qtd, total, total_market, pm, price, result)
     # print(stock)
     if open_market == 0:
         print(data_output)
@@ -65,6 +65,9 @@ for r in stocks:
         price = stock.info["currentPrice"]
         total_market = qtd * price
         result = (qtd * price) - float(total)
+        #data_output = "\nId: {} Ticker: {} Qtd: {} Total: {} Total Market: {} PM: {} Price: {} Result: {}".format(id, ticker, qtd, total, total_market, pm, price, result)
+        #data_output = "\nId: {} Ticker: {} \n   Qtd: {} \n   Total: {} \n   Total Market: {} \n   PM: {} \n   Price: {} \n   Result: {}".format(id, ticker, qtd, total, total_market, pm, price, result)
+        data_output = "\nId: {} Ticker: {} \n---------------------------------\n   Qtd: {} \n   Total: {} \n   Total Market: {} \n   PM: {} \n   Price: {} \n   Result: {}".format(id, ticker, qtd, total, total_market, pm, price, result)
         print(data_output)
 
 print("\n\nDone!\n")
